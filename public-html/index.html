@@ -1,0 +1,45 @@
+<html>
+   <head>
+      <title>VAST 4.0 Tester</title>
+      <link rel="stylesheet" href="http://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css"/>
+      <script src="http://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
+   </head>
+   <body>
+      <h2>VAST 4.0 test: Linear 30 seconds video ad, skippable after 10 seconds</h2>
+      <br>
+      <video id='my-video' controls style="width: 640px; height: 360px;">
+         <source src='./media/Nikon D4 Movie Sample 03.mp4' type='video/mp4'/>
+      </video>
+      <br>
+      <p>
+         <a href="./vastPreRoll.xml">VAST 4.0 Response</a>
+      </p>
+      <p>
+         <a href="./media/Licences.txt">Media Liceses</a>
+      </p>
+      <script type="text/javascript">
+         fluidPlayer(
+            'my-video',
+             {
+                 vastOptions: {
+                     adList: [
+                        {
+                           roll: 'preRoll',
+                           vastTag: 'vastPreRoll.xml'
+                        }
+                     ],
+                     skipButtonCaption: 'Wait [seconds] more second(s)',
+                     vastTimeout:                5000,
+                     maxAllowedVastTagRedirects: 1,
+
+                     vastAdvanced: {
+                         vastLoadedCallback:       (function() { console.log("Vast Loaded") }),
+                         vastVideoSkippedCallback: (function() { console.log("Video Skipped") }),
+                         vastVideoEndedCallback:   (function() { console.log("Video ended") })
+                     }
+                 }
+             }
+         );
+      </script>
+   </body>
+</html>
